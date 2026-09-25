@@ -1,0 +1,1 @@
+integrante, usuario de GitHub, rama/tarea inicial y Pull Request
