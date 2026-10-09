@@ -6,4 +6,22 @@ export function activarCompletar(render) {
   // 2. Comprobar que el botón tenga data-action="complete".
   // 3. Obtener el id numérico del <li data-id="...">.
   // 4. Llamar a toggleTarea(id) y después a render().
+
+
+  const lista = document.querySelector("#task-list");
+
+  lista.addEventListener("click", (event) => {
+    if (event.target.dataset.action !== "complete") {
+      return;
+    }
+
+    const li = event.target.closest("li");
+    const id = Number(li.dataset.id);
+
+    toggleTarea(id);
+    render();
+  });
 }
+
+
+
