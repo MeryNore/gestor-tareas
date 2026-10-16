@@ -4,11 +4,7 @@ Proyecto de ejemplo para practicar un flujo de trabajo colaborativo con Git y Gi
 
 ## Estado del proyecto
 
-<<<<<<< HEAD
-Proyecto preparado para filtrar tareas
-=======
 Proyecto finalizado.
->>>>>>> origin/develop
 
 ## Ejecución
 
