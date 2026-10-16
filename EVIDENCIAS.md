@@ -18,6 +18,25 @@ Pegar la salida de:
 
 ```bash
 git log --oneline --graph --all --decorate
+
+*   d57c01f (HEAD -> main, tag: v1.0, origin/main, origin/HEAD) Merge pull request #24 from MeryNore/develop
+|\  
+| *   2a81f26 (origin/develop, feature/anadir-tarea, develop) Merge pull request #23 from MeryNore/feature/eliminar-tarea
+| |\  
+| | * 6b7106e (origin/feature/eliminar-tarea) cambios en el codigo eliminar.js
+| |/  
+| *   e929f57 Merge pull request #22 from MeryNore/feature/completar-tarea
+| |\  
+| | * 13ed640 (origin/feature/completar-tarea) cambios rocio de devops
+| * |   dc1dd19 Merge pull request #20 from MeryNore/feature/filtrar-tarea
+| |\ \  
+| | | | * c046060 (origin/feature/filtrar-tarea) cambios filtro
+| | | |/| 
+| | |/|/  
+| | |/|   
+| |/| |   
+| * | |   abd07b1 Merge pull request #19 from MeryNore/feature/eliminar-tarea
+:
 ```
 
 ## Evidencias individuales RA1
