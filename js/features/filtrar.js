@@ -8,4 +8,4 @@ export function activarFiltro(render) {
     render();
   });
 }
-import { setFiltro } from "../store.js";
+
