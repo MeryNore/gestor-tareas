@@ -1,17 +1,17 @@
 # Evidencias grupales · Práctica 2 Docker
 
-**Equipo:** TODO  
-**Integrantes:** TODO  
-**Fecha:** TODO
+**Equipo:** 
+**Integrantes:** Rocio Caño, Marta del Olmo, Melisa Moreno, Mª Paz Noreña 
+**Fecha:** 23/10/26
 
 > No hace falta una captura por comando. Bastan resultados breves y explicaciones comprensibles. Las evidencias son del **equipo**.
 
 ## 1. Primeros contenedores
 
-- [ ] `docker --version` / `docker compose version` comprobados.
-- [ ] `hello-world` ejecutado.
-- [ ] Nginx accesible en `http://localhost:8081`.
-- [ ] Se ha detenido, iniciado y eliminado el contenedor.
+- [x] `docker --version` / `docker compose version` comprobados.
+- [x] `hello-world` ejecutado.
+- [x] Nginx accesible en `http://localhost:8081`.
+- [x] Se ha detenido, iniciado y eliminado el contenedor.
 
 **Comandos utilizados y resultado:** TODO
 
@@ -19,13 +19,14 @@
 
 ## 2. Nuestra imagen
 
-- [ ] Imagen construida con `docker build`.
-- [ ] Aplicación accesible en `http://localhost:8080`.
-- [ ] Cambio visual comprobado tras reconstruir y recrear el contenedor.
+- [x] Imagen construida con `docker build`.
+- [x] Aplicación accesible en `http://localhost:8080`.
+- [x] Cambio visual comprobado tras reconstruir y recrear el contenedor.
 
 **Comandos y resultados:** TODO
 
-**¿Por qué el contenedor antiguo no cambia al reconstruir la imagen?** TODO
+**¿Por qué el contenedor antiguo no cambia al reconstruir la imagen?** 
+Porque los contenedores son estáticos e isolados; una vez creados a partir de una imagen, no se actualizan solos si modificas el código fuente en tu ordenador.
 
 ## 3. Persistencia de datos
 
