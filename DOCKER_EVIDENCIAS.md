@@ -24,20 +24,37 @@
 - [x] Cambio visual comprobado tras reconstruir y recrear el contenedor.
 
 **Comandos y resultados:** TODO
+```bash
+# Construir la imagen propia del gestor de tareas
+docker build -t gestor-tareas:2.0 .
+
+# Comprobar que la imagen aparece en el sistema
+docker images
+
+# Arrancar el contenedor individual mapeando el puerto 8080
+docker run -d --name gestor-tareas -p 127.0.0.1:8080:80 gestor-tareas:2.0
 
 **¿Por qué el contenedor antiguo no cambia al reconstruir la imagen?** 
 Porque los contenedores son estáticos e isolados; una vez creados a partir de una imagen, no se actualizan solos si modificas el código fuente en tu ordenador.
 
 ## 3. Persistencia de datos
 
-- [ ] Volumen creado.
-- [ ] Un contenedor escribe un archivo en el volumen.
-- [ ] Otro contenedor recupera el archivo tras eliminar el primero.
+- [x] Volumen creado.
+- [x] Un contenedor escribe un archivo en el volumen.
+- [x] Otro contenedor recupera el archivo tras eliminar el primero.
 
 **Comandos y resultado:** TODO
+# Crear el volumen
+docker volume create datos-devops
+
+# Escribir el archivo desde un contenedor temporal Alpine
+docker run --rm -v datos-devops:/datos alpine:3.24 sh -c "echo datos persistentes > /datos/prueba.txt"
+
+# Leer el archivo desde otro contenedor distinto (resultado esperado: "datos persistentes")
+docker run --rm -v datos-devops:/datos alpine:3.24 cat /datos/prueba.txt
 
 **¿Qué relación tiene esto con las bases de datos?** TODO
-
+Los volúmenes en Docker permiten que la información almacenada por una base de datos (como tablas, registros o usuarios) resida fuera del contenedor efímero. De este modo, si el contenedor de la base de datos se apaga, se actualiza o se elimina, los datos no se pierden y se conservan intactos para futuras ejecuciones.
 ## 4. Docker Compose
 
 - [ ] Servicios `web` y `proxy` iniciados.
