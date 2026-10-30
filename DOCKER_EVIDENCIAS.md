@@ -13,11 +13,11 @@
 - [x] Nginx accesible en `http://localhost:8081`.
 - [x] Se ha detenido, iniciado y eliminado el contenedor.
 
-**Comandos utilizados y resultado:** TODO.
+**Comandos utilizados y resultado:** TODO  
 `docker run --rm hello-world`
 --rm: Significa remove (eliminar). Es una instrucción de limpieza que le dice a Docker: "En cuanto este contenedor termine su trabajo y se apague, destrúyelo y bórralo para que no deje basura inútil en el sistema".
 
-**¿Qué significa `8081:80`?** TODO.
+**¿Qué significa `8081:80`?** TODO  
 El puerto 8081 es la puerta de nuestro ordenador físico desde la que entras a la web en tu navegador. El puerto 80 es la puerta interna del contenedor Nginx que recibe nuestra visita para mostrarte la página.
 
 ## 2. Nuestra imagen
