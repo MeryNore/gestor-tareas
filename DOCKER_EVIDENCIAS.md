@@ -14,8 +14,11 @@
 - [x] Se ha detenido, iniciado y eliminado el contenedor.
 
 **Comandos utilizados y resultado:** TODO
+`docker run --rm hello-world`
+--rm: Significa remove (eliminar). Es una instrucción de limpieza que le dice a Docker: "En cuanto este contenedor termine su trabajo y se apague, destrúyelo y bórralo para que no deje basura inútil en el sistema"
 
 **¿Qué significa `8081:80`?** TODO
+El puerto 8081 es la puerta de nuestro ordenador físico desde la que entras a la web en tu navegador. El puerto 80 es la puerta interna del contenedor Nginx que recibe nuestra visita para mostrarte la página.
 
 ## 2. Nuestra imagen
 
@@ -24,18 +27,18 @@
 - [x] Cambio visual comprobado tras reconstruir y recrear el contenedor.
 
 **Comandos y resultados:** TODO
-```bash
-# Construir la imagen propia del gestor de tareas
-docker build -t gestor-tareas:2.0 .
+`docker build -t gestor-tareas:2.0 .`
+Construir la imagen propia del gestor de tareas
 
-# Comprobar que la imagen aparece en el sistema
-docker images
+`docker images`
+Comprobar que la imagen aparece en el sistema
 
-# Arrancar el contenedor individual mapeando el puerto 8080
-docker run -d --name gestor-tareas -p 127.0.0.1:8080:80 gestor-tareas:2.0
+`docker run -d --name gestor-tareas -p 127.0.0.1:8080:80 gestor-tareas:2.0`
+Arrancar el contenedor individual mapeando el puerto 8080
+
 
 **¿Por qué el contenedor antiguo no cambia al reconstruir la imagen?** 
-Porque los contenedores son estáticos e isolados; una vez creados a partir de una imagen, no se actualizan solos si modificas el código fuente en tu ordenador.
+Esto ocurre porque el contenedor antiguo está ejecutando una imagen estática (una "fotografía" del código viejo). Para que el nuevo título aparezca, es necesario volver a "fotografiar" el código reconstruyendo la imagen de nuevo y borrar/recrear el contenedor.
 
 ## 3. Persistencia de datos
 
