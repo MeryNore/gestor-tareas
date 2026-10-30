@@ -18,7 +18,7 @@
 --rm: Significa remove (eliminar). Es una instrucción de limpieza que le dice a Docker: "En cuanto este contenedor termine su trabajo y se apague, destrúyelo y bórralo para que no deje basura inútil en el sistema".
 
 **¿Qué significa `8081:80`?** TODO  
-El puerto 8081 es la puerta de nuestro ordenador físico desde la que entras a la web en tu navegador. El puerto 80 es la puerta interna del contenedor Nginx que recibe nuestra visita para mostrarte la página.
+El puerto `8081` es la puerta de nuestro ordenador físico desde la que entras a la web en tu navegador. El puerto 80 es la puerta interna del contenedor Nginx que recibe nuestra visita para mostrarte la página.
 
 ## 2. Nuestra imagen
 
@@ -26,15 +26,15 @@ El puerto 8081 es la puerta de nuestro ordenador físico desde la que entras a l
 - [x] Aplicación accesible en `http://localhost:8080`.
 - [x] Cambio visual comprobado tras reconstruir y recrear el contenedor.
 
-**Comandos y resultados:** TODO
+**Comandos y resultados:** TODO   
 `docker build -t gestor-tareas:2.0 .`
-Construir la imagen propia del gestor de tareas
+Construir la imagen propia del gestor de tareas.
 
 `docker images`
-Comprobar que la imagen aparece en el sistema
+Comprobar que la imagen aparece en el sistema.
 
 `docker run -d --name gestor-tareas -p 127.0.0.1:8080:80 gestor-tareas:2.0`
-Arrancar el contenedor individual mapeando el puerto 8080
+Arrancar el contenedor individual mapeando el puerto 8080.
 
 
 **¿Por qué el contenedor antiguo no cambia al reconstruir la imagen?** 
@@ -46,18 +46,25 @@ Esto ocurre porque el contenedor antiguo está ejecutando una imagen estática (
 - [x] Un contenedor escribe un archivo en el volumen.
 - [x] Otro contenedor recupera el archivo tras eliminar el primero.
 
-**Comandos y resultado:** TODO
-# Crear el volumen
-docker volume create datos-devops
+**Comandos y resultado:** TODO   
+`docker volume create datos-devops`
+Crear el volumen.
 
-# Escribir el archivo desde un contenedor temporal Alpine
-docker run --rm -v datos-devops:/datos alpine:3.24 sh -c "echo datos persistentes > /datos/prueba.txt"
+`docker run --rm -v datos-devops:/datos alpine:3.24 sh -c "echo datos persistentes > /datos/prueba.txt"`
+Escribir el archivo desde un contenedor temporal Alpine.
 
-# Leer el archivo desde otro contenedor distinto (resultado esperado: "datos persistentes")
-docker run --rm -v datos-devops:/datos alpine:3.24 cat /datos/prueba.txt
+`docker run --rm -v datos-devops:/datos alpine:3.24 cat /datos/prueba.txt`
+Leer el archivo desde otro contenedor distinto (resultado esperado: "datos persistentes").
 
-**¿Qué relación tiene esto con las bases de datos?** TODO
+**¿por qué se conserva el archivo cuando desaparece el primer contenedor?**
+Porque el volumen (datos-devops) es como un "disco duro externo" conectado al contenedor. Aunque el contenedor se destruya, el disco duro y la información que hay dentro siguen existiendo en el ordenador anfitrión (tu máquina), listos para conectarse a un contenedor nuevo.
+
+**¿para qué sería útil un volumen en una aplicación con base de datos?**
+Para que no se borre toda la información (usuarios, contraseñas, mensajes) si el contenedor de la base de datos se apaga, se reinicia o se actualiza. El volumen garantiza que los datos sean permanentes.
+
+**¿Qué relación tiene esto con las bases de datos?** TODO   
 Los volúmenes en Docker permiten que la información almacenada por una base de datos (como tablas, registros o usuarios) resida fuera del contenedor efímero. De este modo, si el contenedor de la base de datos se apaga, se actualiza o se elimina, los datos no se pierden y se conservan intactos para futuras ejecuciones.
+
 ## 4. Docker Compose
 
 - [ ] Servicios `web` y `proxy` iniciados.
