@@ -46,7 +46,7 @@ Esto ocurre porque el contenedor antiguo está ejecutando una imagen estática (
 - [x] Un contenedor escribe un archivo en el volumen.
 - [x] Otro contenedor recupera el archivo tras eliminar el primero.
 
-**Comandos y resultado:** TODO   
+**Comandos y resultado:**    
 `docker volume create datos-devops`
 Crear el volumen.
 
@@ -67,22 +67,27 @@ Los volúmenes en Docker permiten que la información almacenada por una base de
 
 ## 4. Docker Compose
 
-- [ ] Servicios `web` y `proxy` iniciados.
-- [ ] La aplicación funciona en `http://localhost:8080`.
-- [ ] Se ha consultado `docker compose ps`.
-- [ ] Se ha probado la comunicación `proxy` → `web`.
+- [X] Servicios `web` y `proxy` iniciados.
+- [X] La aplicación funciona en `http://localhost:8080`.
+- [X] Se ha consultado `docker compose ps`.
+- [X] Se ha probado la comunicación `proxy` → `web`.
 
-**Comandos y resultado:** TODO
-
-**¿Por qué el proxy se conecta a `web` por su nombre?** TODO
-
+**Comandos y resultado:** 
+`docker compose up -d --build` -> Construye y arranca a la vez los dos servicios (`web` y `proxy`) en segundo plano, creando una red interna para que se comuniquen.
+`docker compose ps` -> Muestra que los dos contenedores están encendidos y funcionando (`Up`).
+`docker compose logs proxy` -> Comprueba en los registros que las visitas que entran por `http://localhost:8080` llegan al proxy y este las redirige correctamente hacia nuestra página `web`.
+**¿Por qué el proxy se conecta a `web` por su nombre?** 
+Porque Docker Compose crea una red privada solo para estos contenedores y le pone a cada uno como dirección su propio nombre del archivo `compose.yaml` (en este caso, `web`). Así el proxy puede encontrarlo llamándolo simplemente `web`, sin tener que memorizar ni escribir números de red (IPs) que pueden cambiar cada vez que se reinician los contenedores.
 ## 5. Incidencias
 
-**Incidencia 1 - Puerto ocupado:** qué ocurrió / cómo lo resolvisteis: TODO
+**Incidencia 1 - Puerto ocupado:** qué ocurrió / cómo lo resolvisteis: 
+Al intentar arrancar el nuevo sistema con Docker Compose en el puerto `8080`, Docker nos dio un error diciendo que ese puerto ya estaba en uso. Ocurrió porque todavía teníamos encendido el contenedor individual que probamos en el paso anterior ocupando esa misma puerta. Lo resolvimos apagando y borrando ese contenedor antiguo con `docker rm -f gestor-tareas` para dejar libre el puerto `8080`.
 
-**Incidencia 2 - Imagen no actualizada:** qué ocurrió / cómo lo resolvisteis: TODO
+**Incidencia 2 - Imagen no actualizada:** qué ocurrió / cómo lo resolvisteis: 
+Al cambiar el título de nuestra aplicación en el código y volver a crear la imagen, vimos que al recargar la página seguía saliendo el título viejo. Esto pasó porque el contenedor que estaba encendido seguía usando la imagen antigua que tenía cargada. Lo solucionamos deteniendo y borrando el contenedor viejo (`docker stop` y `docker rm`) y volviendo a crear uno nuevo a partir de la imagen recién actualizada.
 
-**Incidencia 3 - Servicio incorrecto en Nginx:** qué ocurrió / cómo lo resolvisteis: TODO
+**Incidencia 3 - Servicio incorrecto en Nginx:** qué ocurrió / cómo lo resolvisteis: 
+Al principio el proxy no lograba conectar con nuestra aplicación web y daba error al cargar la página. Revisamos el archivo de configuración de Nginx (`default.conf`) y vimos que apuntaba a un nombre de destino que no coincidía con el servicio de nuestro `compose.yaml`. Lo arreglamos cambiando el destino en la configuración de Nginx para que apuntara exactamente al nombre `web`.
 
 ## 6. Conclusión del equipo
 
