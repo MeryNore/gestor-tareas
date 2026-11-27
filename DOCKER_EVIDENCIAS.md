@@ -91,10 +91,13 @@ Al principio el proxy no lograba conectar con nuestra aplicación web y daba err
 
 ## 6. Conclusión del equipo
 
-**Dos cosas que hemos aprendido:** TODO
+**Dos cosas que hemos aprendido:**
+1. **Crear imágenes propias y entender que los contenedores son estáticos:** Hemos aprendido a empaquetar nuestra web con un `Dockerfile` y a comprender que un contenedor en marcha es como una "fotografía" fija; si editamos el código fuente, debemos volver a construir la imagen (`--build`) y recrear el contenedor para ver los cambios.
+2. **Orquestar varios contenedores con Docker Compose:** Hemos visto cómo levantar a la vez un servicio `proxy` y nuestra aplicación `web`, haciendo que solo el proxy sea accesible desde nuestro ordenador (`localhost:8080`) y que ambos se comuniquen internamente usando simplemente el nombre del servicio sin depender de direcciones IP.
 
-**Una duda o dificultad que hemos tenido:** TODO
+**Una duda o dificultad que hemos tenido:**
+Al principio nos costó entender por qué los cambios en el código o en la configuración de Nginx no se aplicaban al hacer un simple reinicio, además de coordinarnos para actualizar (`git pull`) antes de subir nuestros avances en equipo a la rama `feature/docker`.
 
 ## 7. Colaboración
 
-**Enlaces a Pull Requests relevantes:** TODO
+**Enlaces a Pull Requests relevantes:**
